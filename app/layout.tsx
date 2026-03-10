@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fira_Code, Inter } from "next/font/google";
+import { Inter, Fira_Code } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,12 +14,12 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Developer Portfolio | Security Operations",
-  description: "Premium cybersecurity developer portfolio with interactive terminal interface",
+  title: "John Doe | Full-Stack Developer & CS Student",
+  description: "Computer Science student and Full-Stack Developer seeking 2027 internships. Explore my projects, skills, and experience.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
+  themeColor: "#09090b",
   width: "device-width",
   initialScale: 1,
 };
@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${firaCode.variable} font-sans antialiased bg-[#050505]`}>
+      <body className={`${inter.variable} ${firaCode.variable} font-sans antialiased bg-[#09090b]`}>
         {children}
       </body>
     </html>
