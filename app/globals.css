@@ -44,11 +44,9 @@
   * {
     @apply border-border;
   }
-
   html {
     scroll-behavior: smooth;
   }
-
   body {
     @apply bg-background text-foreground;
   }
@@ -83,7 +81,7 @@
 }
 
 .bento-card:hover {
-  background: #a6ffbc;
+  background: #00ff41;
   color: #000000;
   box-shadow: 8px 8px 0px #ffffff;
 }
@@ -105,16 +103,8 @@
 
 /* Terminal cursor blink */
 @keyframes blink {
-
-  0%,
-  50% {
-    opacity: 1;
-  }
-
-  51%,
-  100% {
-    opacity: 0;
-  }
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 .cursor-blink {
@@ -123,13 +113,8 @@
 
 /* Scrolling marquee */
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee {
