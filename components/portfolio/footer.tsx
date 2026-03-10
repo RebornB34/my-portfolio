@@ -15,7 +15,7 @@ export function Footer() {
               JD<span className="text-purple-500">.</span>
             </a>
             <p className="text-sm text-zinc-500">
-              &copy; {currentYear} John Doe. All rights reserved.
+              &copy; {currentYear} Brian Bundi. All rights reserved.
             </p>
           </div>
 

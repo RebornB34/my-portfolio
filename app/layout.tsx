@@ -14,7 +14,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "John Doe | Full-Stack Developer & CS Student",
+  title: "Brian Bundi | Full-Stack Developer & CS Student",
   description: "Computer Science student and Full-Stack Developer seeking 2027 internships. Explore my projects, skills, and experience.",
 };
 
