@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export function EducationBlock() {
   const [logLines, setLogLines] = useState<string[]>([]);
 
-  const fullLog = [
+  const fullLog = useMemo(() => [
     "[INFO] INITIALIZING DEGREE...",
     "[OK] B.S. COMPUTER SCIENCE",
     "[INST] UNIVERSITY NAME",
@@ -24,7 +24,7 @@ export function EducationBlock() {
     "  > AWS Cloud Practitioner",
     "  > Meta Frontend Dev",
     "[OK] ALL SYSTEMS NOMINAL",
-  ];
+  ], []);
 
   useEffect(() => {
     let currentIndex = 0;
@@ -38,7 +38,7 @@ export function EducationBlock() {
     }, 150);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [fullLog]);
 
   return (
     <div className="bento-card p-6 h-full min-h-[280px] overflow-hidden">
@@ -47,21 +47,24 @@ export function EducationBlock() {
       </div>
 
       <div className="font-mono text-xs space-y-1 h-[calc(100%-2rem)] overflow-y-auto">
-        {logLines.map((line, index) => (
-          <div key={index} className="leading-relaxed">
-            {line.startsWith("[OK]") ? (
-              <span className="neon-text">{line}</span>
-            ) : line.startsWith("[INFO]") || line.startsWith("[LOAD]") ? (
-              <span className="text-blue-400">{line}</span>
-            ) : line.startsWith("  >") ? (
-              <span className="text-gray-400">{line}</span>
-            ) : line.startsWith("---") ? (
-              <span className="text-gray-600">{line}</span>
-            ) : (
-              <span className="text-white">{line}</span>
-            )}
-          </div>
-        ))}
+        {logLines.map((line, index) => {
+          if (!line) return null;
+          return (
+            <div key={index} className="leading-relaxed">
+              {line.startsWith("[OK]") ? (
+                <span className="neon-text">{line}</span>
+              ) : line.startsWith("[INFO]") || line.startsWith("[LOAD]") ? (
+                <span className="text-blue-400">{line}</span>
+              ) : line.startsWith("  >") ? (
+                <span className="text-gray-400">{line}</span>
+              ) : line.startsWith("---") ? (
+                <span className="text-gray-600">{line}</span>
+              ) : (
+                <span className="text-white">{line}</span>
+              )}
+            </div>
+          );
+        })}
         <span className="neon-text cursor-blink">_</span>
       </div>
     </div>
