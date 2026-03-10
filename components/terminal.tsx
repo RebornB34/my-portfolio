@@ -3,102 +3,54 @@
 import { useState, useRef, useEffect, type KeyboardEvent } from "react";
 import { Terminal as TerminalIcon, Maximize2, Minimize2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTerminal, type TerminalLine } from "@/hooks/use-terminal";
 
-interface TerminalLine {
-  type: "input" | "output" | "error" | "system";
-  content: string;
-  timestamp?: string;
-}
+const getTimestamp = () => {
+  const now = new Date();
+  return now.toLocaleTimeString("en-US", { hour12: false });
+};
 
 const initialLines: TerminalLine[] = [
   {
     type: "system",
     content: "CyberSec Terminal v2.4.1 - Secure Connection Established",
-    timestamp: "10:23:45",
+    timestamp: getTimestamp(),
   },
   {
     type: "system",
     content: "Initializing security protocols...",
-    timestamp: "10:23:46",
+    timestamp: getTimestamp(),
   },
   {
     type: "output",
     content: "[OK] Firewall status: ACTIVE",
-    timestamp: "10:23:47",
+    timestamp: getTimestamp(),
   },
   {
     type: "output",
     content: "[OK] Intrusion Detection System: ONLINE",
-    timestamp: "10:23:47",
+    timestamp: getTimestamp(),
   },
   {
     type: "output",
     content: "[OK] SSL/TLS Encryption: ENABLED",
-    timestamp: "10:23:48",
+    timestamp: getTimestamp(),
   },
   {
     type: "system",
     content: "System ready. Type 'help' for available commands.",
-    timestamp: "10:23:48",
-  },
-  { type: "input", content: "scan --network 192.168.1.0/24", timestamp: "10:24:12" },
-  {
-    type: "output",
-    content: "Scanning network range 192.168.1.0/24...",
-    timestamp: "10:24:12",
-  },
-  {
-    type: "output",
-    content: "Found 24 active hosts | 3 potential vulnerabilities detected",
-    timestamp: "10:24:15",
-  },
-  { type: "input", content: "threat-level --report", timestamp: "10:25:03" },
-  { type: "output", content: "Current Threat Level: LOW", timestamp: "10:25:03" },
-  {
-    type: "output",
-    content: "No critical alerts in the last 24 hours",
-    timestamp: "10:25:03",
+    timestamp: getTimestamp(),
   },
 ];
 
-const commands: Record<string, string[]> = {
-  help: [
-    "Available commands:",
-    "  scan [--network <range>]  - Scan network for devices",
-    "  status                    - Show system status",
-    "  threat-level              - Display current threat assessment",
-    "  logs [--tail <n>]         - View recent log entries",
-    "  clear                     - Clear terminal",
-    "  exit                      - Close session",
-  ],
-  status: [
-    "System Status Report",
-    "─────────────────────────────────────",
-    "CPU Usage:        12%",
-    "Memory:           4.2GB / 16GB",
-    "Network I/O:      1.2 Mbps / 0.8 Mbps",
-    "Active Sessions:  3",
-    "Uptime:           14 days, 6 hours",
-  ],
-  "threat-level": [
-    "Threat Assessment Report",
-    "─────────────────────────────────────",
-    "Current Level:    LOW",
-    "Active Threats:   0",
-    "Blocked Attacks:  147 (last 24h)",
-    "Risk Score:       12/100",
-  ],
-  logs: [
-    "[10:20:15] INFO  - User authentication successful",
-    "[10:21:33] INFO  - Backup process completed",
-    "[10:22:01] WARN  - High CPU usage detected (brief spike)",
-    "[10:23:45] INFO  - Terminal session initiated",
-    "[10:24:15] INFO  - Network scan completed",
-  ],
-};
-
 export function Terminal() {
-  const [lines, setLines] = useState<TerminalLine[]>(initialLines);
+  const { lines, prompt, executeCommand, navigateHistory } = useTerminal({
+    initialLines,
+    username: "operator",
+    hostname: "cybersec",
+    currentDir: "~",
+  });
+
   const [input, setInput] = useState("");
   const [isMaximized, setIsMaximized] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -110,67 +62,22 @@ export function Terminal() {
     }
   }, [lines]);
 
-  const getTimestamp = () => {
-    const now = new Date();
-    return now.toLocaleTimeString("en-US", { hour12: false });
-  };
-
-  const handleCommand = (cmd: string) => {
-    const trimmedCmd = cmd.trim().toLowerCase();
-    const timestamp = getTimestamp();
-
-    const newLines: TerminalLine[] = [
-      ...lines,
-      { type: "input", content: cmd, timestamp },
-    ];
-
-    if (trimmedCmd === "clear") {
-      setLines([
-        {
-          type: "system",
-          content: "Terminal cleared.",
-          timestamp: getTimestamp(),
-        },
-      ]);
-      return;
-    }
-
-    if (trimmedCmd === "exit") {
-      setLines([
-        ...newLines,
-        { type: "system", content: "Session terminated.", timestamp: getTimestamp() },
-      ]);
-      return;
-    }
-
-    const baseCmd = trimmedCmd.split(" ")[0];
-    const response = commands[baseCmd];
-
-    if (response) {
-      setLines([
-        ...newLines,
-        ...response.map((line) => ({
-          type: "output" as const,
-          content: line,
-          timestamp: getTimestamp(),
-        })),
-      ]);
-    } else {
-      setLines([
-        ...newLines,
-        {
-          type: "error",
-          content: `Command not found: ${baseCmd}. Type 'help' for available commands.`,
-          timestamp: getTimestamp(),
-        },
-      ]);
-    }
-  };
-
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && input.trim()) {
-      handleCommand(input);
+      executeCommand(input);
       setInput("");
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prevCommand = navigateHistory("up");
+      if (prevCommand !== null) {
+        setInput(prevCommand);
+      }
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const nextCommand = navigateHistory("down");
+      if (nextCommand !== null) {
+        setInput(nextCommand);
+      }
     }
   };
 
@@ -226,34 +133,48 @@ export function Terminal() {
             </span>
             <span
               className={cn(
-                line.type === "input" && "text-primary",
+                line.type === "input" && "text-foreground",
                 line.type === "output" && "text-foreground",
                 line.type === "error" && "text-destructive",
-                line.type === "system" && "text-emerald-400"
+                line.type === "system" && "text-emerald-400",
+                line.type === "directory" && "text-primary font-semibold"
               )}
             >
               {line.type === "input" && (
-                <span className="text-emerald-400 mr-2">{">"}</span>
+                <span className="mr-2">
+                  <span className="text-emerald-400">operator</span>
+                  <span className="text-muted-foreground">@</span>
+                  <span className="text-primary">cybersec</span>
+                  <span className="text-muted-foreground"> ~ </span>
+                  <span className="text-yellow-400">%</span>
+                  <span className="text-foreground"> </span>
+                </span>
               )}
               {line.content}
             </span>
           </div>
         ))}
 
-        {/* Input Line */}
+        {/* Input Line with Zsh-style prompt */}
         <div className="flex gap-3 leading-relaxed mt-1">
           <span className="shrink-0 text-muted-foreground/50 select-none">
             {getTimestamp()}
           </span>
           <div className="flex items-center flex-1">
-            <span className="text-emerald-400 mr-2">{">"}</span>
+            <span className="mr-2 shrink-0">
+              <span className="text-emerald-400">operator</span>
+              <span className="text-muted-foreground">@</span>
+              <span className="text-primary">cybersec</span>
+              <span className="text-muted-foreground"> ~ </span>
+              <span className="text-yellow-400">%</span>
+            </span>
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent text-primary outline-none caret-primary"
+              className="flex-1 bg-transparent text-foreground outline-none caret-primary"
               spellCheck={false}
               autoFocus
             />
