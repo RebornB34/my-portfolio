@@ -62,13 +62,13 @@ const fileSystem: FileNode[] = [
 
 function StatusIcon({ status }: { status?: "secure" | "warning" | "locked" }) {
   if (status === "secure") {
-    return <Shield className="h-3 w-3 text-emerald-400" />;
+    return <Shield className="h-3 w-3 text-[#00FF41]" />;
   }
   if (status === "warning") {
-    return <AlertTriangle className="h-3 w-3 text-amber-400" />;
+    return <AlertTriangle className="h-3 w-3 text-[#B5179E]" />;
   }
   if (status === "locked") {
-    return <Lock className="h-3 w-3 text-primary" />;
+    return <Lock className="h-3 w-3 text-[#B5179E]" />;
   }
   return null;
 }
@@ -83,32 +83,35 @@ function TreeNode({ node, depth = 0 }: { node: FileNode; depth?: number }) {
       <button
         onClick={() => isFolder && setIsOpen(!isOpen)}
         className={cn(
-          "flex w-full items-center gap-2 rounded px-2 py-1.5 text-sm transition-colors",
-          "hover:bg-secondary/50 text-muted-foreground hover:text-foreground",
-          "focus:outline-none focus:ring-1 focus:ring-primary/50"
+          "flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-all duration-200",
+          "hover:bg-white/5 text-white/60 hover:text-white/90",
+          "focus:outline-none focus:ring-1 focus:ring-[#B5179E]/30"
         )}
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
       >
         {isFolder ? (
           <>
             {isOpen ? (
-              <ChevronDown className="h-3.5 w-3.5 text-primary/70" />
+              <ChevronDown className="h-3.5 w-3.5 text-[#B5179E]/70" />
             ) : (
-              <ChevronRight className="h-3.5 w-3.5 text-primary/70" />
+              <ChevronRight className="h-3.5 w-3.5 text-[#B5179E]/70" />
             )}
             {isOpen ? (
-              <FolderOpen className="h-4 w-4 text-primary" />
+              <FolderOpen className="h-4 w-4 text-[#B5179E]" />
             ) : (
-              <Folder className="h-4 w-4 text-primary/70" />
+              <Folder className="h-4 w-4 text-[#B5179E]/70" />
             )}
           </>
         ) : (
           <>
             <span className="w-3.5" />
-            <File className="h-4 w-4 text-muted-foreground" />
+            <File className="h-4 w-4 text-white/40" />
           </>
         )}
-        <span className="flex-1 truncate text-left font-mono text-xs">
+        <span className={cn(
+          "flex-1 truncate text-left font-mono text-xs",
+          isFolder && "text-[#B5179E]/90"
+        )}>
           {node.name}
         </span>
         <StatusIcon status={node.status} />
@@ -127,9 +130,10 @@ function TreeNode({ node, depth = 0 }: { node: FileNode; depth?: number }) {
 export function FileTree() {
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-        <Folder className="h-4 w-4 text-primary" />
-        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+      {/* Header with clean sans-serif */}
+      <div className="flex items-center gap-2 border-b border-white/5 px-4 py-3">
+        <Folder className="h-4 w-4 text-[#B5179E]" />
+        <span className="text-xs font-sans font-semibold uppercase tracking-wider text-white/50">
           File Explorer
         </span>
       </div>
@@ -138,12 +142,12 @@ export function FileTree() {
           <TreeNode key={`${node.name}-${i}`} node={node} />
         ))}
       </div>
-      <div className="border-t border-border px-4 py-2">
-        <div className="flex items-center justify-between text-xs text-muted-foreground">
+      <div className="border-t border-white/5 px-4 py-2.5">
+        <div className="flex items-center justify-between text-xs font-sans text-white/40">
           <span>12 files</span>
-          <span className="flex items-center gap-1">
-            <Shield className="h-3 w-3 text-emerald-400" />
-            <span>8 secure</span>
+          <span className="flex items-center gap-1.5">
+            <Shield className="h-3 w-3 text-[#00FF41]" />
+            <span className="text-[#00FF41]/70">8 secure</span>
           </span>
         </div>
       </div>
