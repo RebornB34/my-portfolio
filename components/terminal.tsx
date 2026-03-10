@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, type KeyboardEvent } from "react";
-import { Terminal as TerminalIcon, Maximize2, Minimize2, X } from "lucide-react";
+import { Terminal as TerminalIcon, Maximize2, Minimize2, X, Circle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTerminal, type TerminalLine } from "@/hooks/use-terminal";
 
@@ -10,42 +10,48 @@ const getTimestamp = () => {
   return now.toLocaleTimeString("en-US", { hour12: false });
 };
 
-const initialLines: TerminalLine[] = [
+// Boot sequence with typing animation
+const bootSequence: TerminalLine[] = [
   {
     type: "system",
-    content: "CyberSec Terminal v2.4.1 - Secure Connection Established",
-    timestamp: getTimestamp(),
-  },
-  {
-    type: "system",
-    content: "Initializing security protocols...",
-    timestamp: getTimestamp(),
-  },
-  {
-    type: "output",
-    content: "[OK] Firewall status: ACTIVE",
-    timestamp: getTimestamp(),
-  },
-  {
-    type: "output",
-    content: "[OK] Intrusion Detection System: ONLINE",
-    timestamp: getTimestamp(),
-  },
-  {
-    type: "output",
-    content: "[OK] SSL/TLS Encryption: ENABLED",
+    content: ">>> INITIALIZING SECURE TERMINAL v3.0.0",
     timestamp: getTimestamp(),
   },
   {
     type: "system",
-    content: "System ready. Type 'help' for available commands.",
+    content: ">>> Loading kernel modules...",
+    timestamp: getTimestamp(),
+  },
+  {
+    type: "output",
+    content: "[PASS] Cryptographic subsystem initialized",
+    timestamp: getTimestamp(),
+  },
+  {
+    type: "output",
+    content: "[PASS] Network security protocols active",
+    timestamp: getTimestamp(),
+  },
+  {
+    type: "output",
+    content: "[PASS] Intrusion detection system online",
+    timestamp: getTimestamp(),
+  },
+  {
+    type: "system",
+    content: ">>> Connection established. Welcome, operator.",
+    timestamp: getTimestamp(),
+  },
+  {
+    type: "system",
+    content: ">>> Type 'help' for available commands.",
     timestamp: getTimestamp(),
   },
 ];
 
 export function Terminal() {
-  const { lines, prompt, executeCommand, navigateHistory } = useTerminal({
-    initialLines,
+  const { lines, prompt, executeCommand, navigateHistory, addLine } = useTerminal({
+    initialLines: [],
     username: "operator",
     hostname: "cybersec",
     currentDir: "~",
@@ -53,8 +59,23 @@ export function Terminal() {
 
   const [input, setInput] = useState("");
   const [isMaximized, setIsMaximized] = useState(false);
+  const [isBooting, setIsBooting] = useState(true);
+  const [bootIndex, setBootIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Boot sequence typing animation
+  useEffect(() => {
+    if (isBooting && bootIndex < bootSequence.length) {
+      const timer = setTimeout(() => {
+        addLine(bootSequence[bootIndex]);
+        setBootIndex((prev) => prev + 1);
+      }, 150 + Math.random() * 100); // Slight randomness for realistic typing
+      return () => clearTimeout(timer);
+    } else if (bootIndex >= bootSequence.length) {
+      setIsBooting(false);
+    }
+  }, [isBooting, bootIndex, addLine]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -88,66 +109,65 @@ export function Terminal() {
   return (
     <div
       className={cn(
-        "flex flex-col rounded-lg border border-border bg-card cyber-glow overflow-hidden",
+        "flex flex-col rounded-xl glass cyber-glow overflow-hidden crt-flicker",
         isMaximized ? "fixed inset-4 z-50" : "h-full"
       )}
     >
-      {/* Terminal Header */}
-      <div className="flex items-center justify-between border-b border-border bg-secondary/50 px-4 py-2">
-        <div className="flex items-center gap-2">
-          <TerminalIcon className="h-4 w-4 text-primary" />
-          <span className="text-sm font-medium text-foreground">
-            secure-terminal@cybersec
-          </span>
-          <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-emerald-400">
-            Encrypted
-          </span>
+      {/* Terminal Header - macOS style */}
+      <div className="flex items-center justify-between border-b border-white/5 bg-black/40 px-4 py-3">
+        <div className="flex items-center gap-3">
+          {/* Traffic light buttons */}
+          <div className="flex items-center gap-2">
+            <button className="h-3 w-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors" />
+            <button className="h-3 w-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors" />
+            <button 
+              onClick={() => setIsMaximized(!isMaximized)}
+              className="h-3 w-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors" 
+            />
+          </div>
+          <div className="flex items-center gap-2 ml-4">
+            <TerminalIcon className="h-4 w-4 text-[#00FF41] text-glow-green" />
+            <span className="text-sm font-mono font-medium text-[#00FF41]/80">
+              operator@cybersec:~
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-1">
-          <button
-            onClick={() => setIsMaximized(!isMaximized)}
-            className="rounded p-1 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-          >
-            {isMaximized ? (
-              <Minimize2 className="h-3.5 w-3.5" />
-            ) : (
-              <Maximize2 className="h-3.5 w-3.5" />
-            )}
-          </button>
-          <button className="rounded p-1 text-muted-foreground transition-colors hover:bg-destructive/20 hover:text-destructive">
-            <X className="h-3.5 w-3.5" />
-          </button>
+        <div className="flex items-center gap-2">
+          <span className="rounded-full bg-[#00FF41]/10 border border-[#00FF41]/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase text-[#00FF41] text-glow-green">
+            SSH Encrypted
+          </span>
         </div>
       </div>
 
-      {/* Terminal Content */}
+      {/* Terminal Content with CRT scanlines */}
       <div
         ref={scrollRef}
         onClick={focusInput}
-        className="relative flex-1 overflow-auto bg-background/50 p-4 font-mono text-sm scanlines cursor-text"
+        className="relative flex-1 overflow-auto bg-[#050505] p-4 font-mono text-sm scanlines cursor-text"
       >
         {lines.map((line, i) => (
-          <div key={i} className="flex gap-3 leading-relaxed">
-            <span className="shrink-0 text-muted-foreground/50 select-none">
+          <div key={i} className="flex gap-3 leading-relaxed typing-animation" style={{ animationDelay: `${i * 0.05}s` }}>
+            <span className="shrink-0 text-[#00FF41]/30 select-none font-mono text-xs">
               {line.timestamp}
             </span>
             <span
               className={cn(
-                line.type === "input" && "text-foreground",
-                line.type === "output" && "text-foreground",
-                line.type === "error" && "text-destructive",
-                line.type === "system" && "text-emerald-400",
-                line.type === "directory" && "text-primary font-semibold"
+                "font-mono",
+                line.type === "input" && "text-[#00FF41] text-glow-green",
+                line.type === "output" && "text-[#00FF41]/90",
+                line.type === "error" && "text-[#B5179E] text-glow-purple",
+                line.type === "system" && "text-[#00FF41]/70",
+                line.type === "directory" && "text-[#B5179E] font-semibold text-glow-purple"
               )}
             >
               {line.type === "input" && (
                 <span className="mr-2">
-                  <span className="text-emerald-400">operator</span>
-                  <span className="text-muted-foreground">@</span>
-                  <span className="text-primary">cybersec</span>
-                  <span className="text-muted-foreground"> ~ </span>
-                  <span className="text-yellow-400">%</span>
-                  <span className="text-foreground"> </span>
+                  <span className="text-[#00FF41]">operator</span>
+                  <span className="text-[#00FF41]/40">@</span>
+                  <span className="text-[#B5179E]">cybersec</span>
+                  <span className="text-[#00FF41]/40"> ~ </span>
+                  <span className="text-[#00FF41]">%</span>
+                  <span className="text-[#00FF41]"> </span>
                 </span>
               )}
               {line.content}
@@ -156,31 +176,33 @@ export function Terminal() {
         ))}
 
         {/* Input Line with Zsh-style prompt */}
-        <div className="flex gap-3 leading-relaxed mt-1">
-          <span className="shrink-0 text-muted-foreground/50 select-none">
-            {getTimestamp()}
-          </span>
-          <div className="flex items-center flex-1">
-            <span className="mr-2 shrink-0">
-              <span className="text-emerald-400">operator</span>
-              <span className="text-muted-foreground">@</span>
-              <span className="text-primary">cybersec</span>
-              <span className="text-muted-foreground"> ~ </span>
-              <span className="text-yellow-400">%</span>
+        {!isBooting && (
+          <div className="flex gap-3 leading-relaxed mt-2">
+            <span className="shrink-0 text-[#00FF41]/30 select-none font-mono text-xs">
+              {getTimestamp()}
             </span>
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent text-foreground outline-none caret-primary"
-              spellCheck={false}
-              autoFocus
-            />
-            <span className="terminal-cursor ml-0.5 h-4 w-2 bg-primary" />
+            <div className="flex items-center flex-1">
+              <span className="mr-2 shrink-0 font-mono">
+                <span className="text-[#00FF41]">operator</span>
+                <span className="text-[#00FF41]/40">@</span>
+                <span className="text-[#B5179E]">cybersec</span>
+                <span className="text-[#00FF41]/40"> ~ </span>
+                <span className="text-[#00FF41]">%</span>
+              </span>
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="flex-1 bg-transparent text-[#00FF41] text-glow-green outline-none caret-[#00FF41] font-mono"
+                spellCheck={false}
+                autoFocus
+              />
+              <span className="terminal-cursor ml-0.5 h-4 w-2.5 bg-[#00FF41] rounded-sm" />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
