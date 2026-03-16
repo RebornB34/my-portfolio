@@ -30,7 +30,7 @@ export function HeroBlock() {
       {/* Terminal Prompt */}
       <div className="mt-6 md:mt-8">
         <div className="font-mono text-sm md:text-base">
-          <span className="neon-text">visitor@portfolio</span>
+          <span className="neon-text">brian@portfolio</span>
           <span className="text-white">:</span>
           <span className="text-blue-400">~</span>
           <span className="text-white">$ </span>

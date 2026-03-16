@@ -8,7 +8,7 @@ const timelineItems = [
     type: "education",
     icon: GraduationCap,
     title: "B.S. Computer Science",
-    organization: "University of Technology",
+    organization: "KCA University",
     date: "Expected May 2027",
     description: [
       "Relevant Coursework: Data Structures, Algorithms, Operating Systems, Database Systems, Computer Networks, Software Engineering",

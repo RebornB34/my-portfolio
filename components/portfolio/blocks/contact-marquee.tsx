@@ -33,7 +33,7 @@ export function ContactMarquee() {
 
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/RebornB34"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 border-2 border-white text-white hover:bg-white hover:text-black transition-colors"
@@ -42,7 +42,7 @@ export function ContactMarquee() {
             <Github className="w-5 h-5" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/brian-bundi-745845354"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 border-2 border-white text-white hover:bg-white hover:text-black transition-colors"
@@ -51,7 +51,7 @@ export function ContactMarquee() {
             <Linkedin className="w-5 h-5" />
           </a>
           <a
-            href="https://twitter.com"
+            href="https://x.com/bundibrianx"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 border-2 border-white text-white hover:bg-white hover:text-black transition-colors"
@@ -60,7 +60,7 @@ export function ContactMarquee() {
             <Twitter className="w-5 h-5" />
           </a>
           <a
-            href="mailto:brianbundi@email.com"
+            href="mailto:bundibrian36@gmail.com"
             className="p-2 border-2 border-white text-white hover:bg-white hover:text-black transition-colors"
             aria-label="Send Email"
           >

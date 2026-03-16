@@ -19,13 +19,11 @@ export function ProjectBlock() {
         </div>
 
         <h2 className="font-sans font-black text-2xl md:text-3xl text-white mb-2">
-          DEVFLOW
+          COMING SOON
         </h2>
 
         <p className="font-mono text-xs md:text-sm text-gray-300 mb-4 leading-relaxed flex-grow">
-          A real-time collaborative IDE with integrated AI assistance,
-          version control, and team workspace management. Built for modern
-          development workflows.
+          Stay tuned for updates on my latest projects. I&apos;m currently working on some exciting stuff that I can&apos;t wait to share. Check back soon for sneak peeks and demos!
         </p>
 
         <div className="font-mono text-xs text-gray-500 mb-4">
@@ -34,7 +32,7 @@ export function ProjectBlock() {
 
         <div className="flex flex-wrap gap-3">
           <a
-            href="https://github.com"
+            href="https://github.com/RebornB34"
             target="_blank"
             rel="noopener noreferrer"
             className="brutalist-btn px-4 py-2 font-mono text-xs md:text-sm inline-flex items-center gap-2"

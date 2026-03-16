@@ -142,7 +142,7 @@ export function Contact() {
 
               <div className="space-y-4">
                 <a
-                  href="mailto:john@example.com"
+                  href="mailto:bundibrian36@gmail.com"
                   className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
@@ -150,7 +150,7 @@ export function Contact() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm text-zinc-500">Email</p>
-                    <p className="text-white">john@example.com</p>
+                    <p className="text-white">bundibrian36@gmail.com</p>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-white transition-colors" />
                 </a>
@@ -166,7 +166,7 @@ export function Contact() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm text-zinc-500">GitHub</p>
-                    <p className="text-white">@johndoe</p>
+                    <p className="text-white">@RebornB34</p>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-white transition-colors" />
                 </a>
@@ -182,7 +182,7 @@ export function Contact() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm text-zinc-500">LinkedIn</p>
-                    <p className="text-white">/in/johndoe</p>
+                    <p className="text-white">/in/brian-bundi-745845354</p>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-white transition-colors" />
                 </a>
