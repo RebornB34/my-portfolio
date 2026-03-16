@@ -51,7 +51,7 @@ export function ContactMarquee() {
             <Linkedin className="w-5 h-5" />
           </a>
           <a
-            href="https://x.com/bundibrianx"
+            href="https://x.com/bundibrianq"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 border-2 border-white text-white hover:bg-white hover:text-black transition-colors"
