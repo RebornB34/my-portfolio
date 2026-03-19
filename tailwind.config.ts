@@ -43,6 +43,21 @@ const config: Config = {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "Fira Code", "monospace"],
       },
+      animation: {
+        "text-gradient": "text-gradient 3s linear infinite",
+      },
+      keyframes: {
+        "text-gradient": {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center"
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center"
+          }
+        }
+      }
     },
   },
   plugins: [],

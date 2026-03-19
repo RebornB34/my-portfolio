@@ -1,112 +1,70 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "#hero", label: "Home" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
-];
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [time, setTime] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString("en-US", { hour12: true }));
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "glass py-4" : "py-6"
-      )}
-    >
-      <nav className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#hero" className="text-xl font-bold text-white">
-          JD<span className="text-purple-500">.</span>
-        </a>
-
-        {/* Desktop navigation */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA button */}
-        <a
-          href="#contact"
-          className="hidden md:inline-flex px-5 py-2.5 rounded-lg font-medium text-sm text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300"
-        >
-          Get in Touch
-        </a>
-
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden text-white p-2"
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <Menu className="w-6 h-6" />
-          )}
-        </button>
-      </nav>
-
+    <nav className="fixed top-0 w-full z-50 bg-[#0B1120]/80 backdrop-blur-md border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex-shrink-0">
+            <Link href="/" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-400">
+              Brian Bundi Portfolio
+            </Link>
+          </div>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-8">
+              <a href="#home" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Home</a>
+              <a href="#about" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">About</a>
+              <a href="#skills" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Skills</a>
+              <a href="#projects" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Projects</a>
+              <a href="#contact" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Contact</a>
+            </div>
+          </div>
+          <div className="hidden md:flex items-center">
+            <div className="px-4 py-1.5 border border-white/10 rounded font-mono text-sm text-gray-300 bg-white/5">
+              {time || "00:00:00 AM"}
+            </div>
+          </div>
+          <div className="-mr-2 flex md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10"
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+      
       {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden glass mt-4 mx-6 rounded-2xl p-6"
-        >
-          <ul className="space-y-4">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg text-zinc-300 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <a
-            href="#contact"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-6 block text-center px-5 py-3 rounded-lg font-medium text-white bg-gradient-to-r from-purple-600 to-blue-600"
-          >
-            Get in Touch
-          </a>
-        </motion.div>
+      {isOpen && (
+        <div className="md:hidden bg-[#0B1120] border-b border-white/10">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="#home" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+            <a href="#about" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">About</a>
+            <a href="#skills" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+            <a href="#projects" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+            <a href="#contact" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            <div className="text-gray-300 px-3 py-2 font-mono text-sm border-t border-white/5 mt-2 pt-2">{time}</div>
+          </div>
+        </div>
       )}
-    </motion.header>
+    </nav>
   );
 }
