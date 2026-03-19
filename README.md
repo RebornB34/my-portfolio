@@ -1,47 +1,44 @@
-# Brian Bundi - Portfolio
+# Brian Bundi - Cyber Portfolio
 
-A modern, brutalist-inspired developer portfolio built with Next.js 15, featuring a terminal/hacker aesthetic with a bento grid layout.
+A modern, sleek dark-mode developer portfolio built with Next.js 15, featuring a deep navy "Cyber" aesthetic, responsive flex layouts, and custom animations.
 
 ## Tech Stack
 
 - **Framework:** Next.js 15 (App Router)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
+- **Styling:** Tailwind CSS (with custom utility configurations)
 - **Icons:** Lucide React
-- **Font:** JetBrains Mono (monospace terminal aesthetic)
+- **Font:** Fira Code (Monospace cyber aesthetic globally)
 
 ## Features
 
-- Brutalist design with sharp corners and bold typography
-- Terminal/hacker aesthetic with neon green accents
-- Bento grid layout for content organization
-- Animated server log education section
-- Scrolling contact marquee
-- Fully responsive design
-- Dark mode by default
+- Sleek Cyber design with deep navy backgrounds and glowing cyan/blue accents
+- Responsive single-page scrolling layout replacing rigid grids
+- Real-time digital clock built directly into the sticky navigation
+- Dynamic, interactive sections:
+  - **Hero Profile**: Animated shield and gradient text.
+  - **About Me**: Feature cards highlighting cybersecurity focus.
+  - **Technical Skills**: Animated progress bars and statistic widgets.
+  - **Projects Showcase**: Standardized terminal console block.
+  - **Contact Form**: Professionally designed layout with modern inputs.
+- Dark mode native out-of-the-box.
 
 ## Project Structure
 
 ```
 my-portfolio/
 ├── app/
-│   ├── layout.tsx      # Root layout with fonts and metadata
-│   ├── page.tsx        # Main portfolio page
-│   └── globals.css     # Global styles and CSS variables
+│   ├── layout.tsx      # Root layout with Fira Code fonts and metadata
+│   ├── page.tsx        # Main scrolling portfolio page
+│   └── globals.css     # Cyber theme CSS variables and styling
 ├── components/
 │   └── portfolio/
-│       ├── bento-grid.tsx           # Main bento grid container
-│       └── blocks/
-│           ├── hero-block.tsx       # Hero section with name
-│           ├── tech-stack-block.tsx # Skills and technologies
-│           ├── project-block.tsx    # Featured project showcase
-│           ├── education-block.tsx  # Animated education log
-│           └── contact-marquee.tsx  # Scrolling contact info
-├── lib/
-│   └── utils.ts        # Utility functions (cn helper)
-└── hooks/
-    └── use-terminal.ts # Terminal hook utilities
+│       ├── navbar.tsx      # Sticky navigation with clock
+│       ├── hero.tsx        # Hero section with name and buttons
+│       ├── about.tsx       # Timeline and feature cards
+│       ├── skills.tsx      # Stats and precise skill progress
+│       ├── projects.tsx    # Showcase terminal interface
+│       └── contact.tsx     # Contact info and form
 ```
 
 ## Getting Started
@@ -52,9 +49,9 @@ my-portfolio/
    cd my-portfolio
    ```
 
-2. Install dependencies:
+2. Install dependencies (Using PNPM is strictly enforced for optimal caching like Vercel):
    ```bash
-   npm install
+   pnpm install
    ```
 
 3. Start the development server:
@@ -64,24 +61,15 @@ my-portfolio/
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Available Scripts
-
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
 ## Customization
 
 To personalize this portfolio:
 
-1. Update the name and bio in `components/portfolio/blocks/hero-block.tsx`
-2. Modify tech stack in `components/portfolio/blocks/tech-stack-block.tsx`
-3. Add your projects in `components/portfolio/blocks/project-block.tsx`
-4. Update education details in `components/portfolio/blocks/education-block.tsx`
-5. Change contact links in `components/portfolio/blocks/contact-marquee.tsx`
+1. Update the name, title, profile avatar and resume link in `components/portfolio/hero.tsx`
+2. Modify cybersecurity skill tags and values in `components/portfolio/skills.tsx`
+3. Add your actual projects to `components/portfolio/projects.tsx`
+4. Update contact details in `components/portfolio/contact.tsx`
 
 ## License
 
 MIT License - feel free to use this template for your own portfolio.
-# Build Refresh
