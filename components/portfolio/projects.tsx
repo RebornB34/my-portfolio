@@ -61,25 +61,25 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#cbc9c0] dark:border-white/5 transition-colors duration-300">
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 font-mono text-cyan-400">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif text-[#a72334] dark:font-mono dark:text-cyan-400 transition-colors">
           Featured Projects
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p className="text-gray-700 dark:text-gray-400 max-w-2xl mx-auto transition-colors">
           Interact with the terminal below to explore my recent work.
         </p>
       </div>
 
-      <div className="w-full max-w-4xl mx-auto bg-[#0a0f18] rounded-xl border border-white/10 shadow-2xl overflow-hidden font-mono flex flex-col h-[500px]">
+      <div className="w-full max-w-4xl mx-auto bg-[#f0f0ea] dark:bg-[#0a0f18] rounded-xl border border-[#cbc9c0] dark:border-white/10 shadow-2xl overflow-hidden font-mono flex flex-col h-[500px] transition-colors">
         {/* Terminal Header */}
-        <div className="bg-[#111827] px-4 py-3 border-b border-white/10 flex items-center gap-2">
-          <TerminalIcon className="w-5 h-5 text-gray-400" />
-          <span className="text-sm text-gray-400 font-medium tracking-wider">brian@portfolio:~</span>
+        <div className="bg-[#e8e7e1] dark:bg-[#111827] px-4 py-3 border-b border-[#cbc9c0] dark:border-white/10 flex items-center gap-2 transition-colors">
+          <TerminalIcon className="w-5 h-5 text-[#1a1a1a] dark:text-gray-400 transition-colors" />
+          <span className="text-sm text-[#1a1a1a] dark:text-gray-400 font-medium tracking-wider transition-colors">brian@portfolio:~</span>
           <div className="ml-auto flex gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
-            <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
+            <div className="w-3 h-3 rounded-full bg-red-400 dark:bg-red-500/20 border border-red-500/50" />
+            <div className="w-3 h-3 rounded-full bg-yellow-400 dark:bg-yellow-500/20 border border-yellow-500/50" />
+            <div className="w-3 h-3 rounded-full bg-green-400 dark:bg-green-500/20 border border-green-500/50" />
           </div>
         </div>
 
@@ -89,19 +89,19 @@ export function Projects() {
           onClick={() => inputRef.current?.focus()}
         >
           {logs.map((log) => (
-            <div key={log.id} className={log.isCommand ? "text-cyan-400" : "text-gray-300"}>
+            <div key={log.id} className={log.isCommand ? "text-[#a72334] dark:text-cyan-400" : "text-[#1a1a1a] dark:text-gray-300"}>
               {log.text}
             </div>
           ))}
           
           <form onSubmit={handleCommand} className="flex items-center gap-2 mt-2">
-            <span className="text-cyan-400">brian@portfolio:~$</span>
+            <span className="text-[#a72334] dark:text-cyan-400 transition-colors">brian@portfolio:~$</span>
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 bg-transparent border-none outline-none text-gray-100 caret-cyan-400 w-full"
+              className="flex-1 bg-transparent border-none outline-none text-[#1a1a1a] dark:text-gray-100 caret-[#a72334] dark:caret-cyan-400 w-full transition-colors"
               spellCheck={false}
               autoComplete="off"
             />
