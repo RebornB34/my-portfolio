@@ -33,6 +33,7 @@ export function Navbar() {
               <Link href="/#about" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">About</Link>
               <Link href="/#skills" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Skills</Link>
               <Link href="/projects" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Projects</Link>
+              <Link href="/blog" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Blog</Link>
               <Link href="/#contact" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Contact</Link>
             </div>
           </div>
@@ -60,6 +61,7 @@ export function Navbar() {
             <Link href="/#about" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">About</Link>
             <Link href="/#skills" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Skills</Link>
             <Link href="/projects" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
+            <Link href="/blog" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Blog</Link>
             <Link href="/#contact" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
             <div className="text-gray-300 px-3 py-2 font-mono text-sm border-t border-white/5 mt-2 pt-2">{time}</div>
           </div>

@@ -1,4 +1,5 @@
 import { Shield, ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -34,12 +35,12 @@ export function Hero() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-          <a 
-            href="#projects"
+          <Link 
+            href="/projects"
             className="px-8 py-3 rounded bg-blue-600 hover:bg-blue-500 text-white font-medium transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)]"
           >
             View My Projects
-          </a>
+          </Link>
           <a
             href="/resume.pdf"
             className="px-8 py-3 rounded bg-white text-gray-900 hover:bg-gray-100 font-medium transition-all hover:scale-105"
