@@ -1,3 +1,5 @@
+import { HTBStats } from "./htb-stats";
+
 export function Skills() {
   const stats = [
     { label: "Projects Completed", value: "15+" },
@@ -46,9 +48,11 @@ export function Skills() {
         <h2 className="text-3xl md:text-4xl font-bold mb-4 font-mono text-cyan-400">
           Skills &amp;&amp; Expertise
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p className="text-gray-400 max-w-2xl mx-auto mb-16">
           A breakdown of my technical proficiencies and hands-on experience in various domains of computer science and cybersecurity.
         </p>
+        
+        <HTBStats />
       </div>
 
       <div className="flex flex-wrap justify-center gap-8 mb-20 relative z-10">
