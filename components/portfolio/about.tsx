@@ -2,9 +2,8 @@ import { ShieldCheck, Code, Users } from "lucide-react";
 
 export function About() {
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="grid md:grid-cols-2 gap-16 items-start">
-        <div className="space-y-8">
+    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-start">
+      <div className="flex-1 space-y-8">
           <h2 className="text-3xl md:text-4xl font-bold font-mono text-cyan-400 leading-snug">
             My Journey in Cybersecurity <br />&amp;&amp; Software Development
           </h2>
@@ -25,7 +24,7 @@ export function About() {
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="flex-1 space-y-6 w-full">
           <div className="bg-[#111827] p-6 rounded-lg border border-white/5 hover:border-cyan-500/30 transition-colors group">
             <div className="flex items-center gap-4 mb-4">
               <ShieldCheck className="w-8 h-8 text-cyan-400 group-hover:scale-110 transition-transform" />
@@ -50,7 +49,6 @@ export function About() {
             <p className="text-gray-400">Sharing knowledge and collaborating with the cybersecurity community.</p>
           </div>
         </div>
-      </div>
     </section>
   );
 }

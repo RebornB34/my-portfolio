@@ -1,26 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Fira_Code } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const firaCode = Fira_Code({
   subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "700", "900"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: ["400", "500", "700"],
+  variable: "--font-fira",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   title: "Brian Bundi | Student Engineer & Builder",
-  description: "Computer Science student and Full-Stack Developer seeking 2027 internships. Terminal-style brutalist portfolio.",
+  description: "Computer Science student and Full-Stack Developer",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#0B1120",
   width: "device-width",
   initialScale: 1,
 };
@@ -32,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-black`}>
+      <body className={`${firaCode.variable} font-sans antialiased bg-[#0B1120] text-gray-100 flex flex-col min-h-screen`}>
         {children}
       </body>
     </html>

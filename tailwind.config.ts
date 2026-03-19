@@ -40,8 +40,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "Fira Code", "monospace"],
+        sans: ["var(--font-fira)", "system-ui", "sans-serif"],
+        mono: ["var(--font-fira)", "monospace"],
       },
       animation: {
         "text-gradient": "text-gradient 3s linear infinite",

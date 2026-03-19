@@ -3,8 +3,8 @@ import { Mail, Phone, Github, Linkedin, Send } from "lucide-react";
 export function Contact() {
   return (
     <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
-      <div className="grid md:grid-cols-2 gap-16">
-        <div className="space-y-8">
+      <div className="flex flex-col md:flex-row gap-16">
+        <div className="flex-1 space-y-8">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-mono text-cyan-400">
               Let's Start a Conversation
@@ -46,7 +46,7 @@ export function Contact() {
           </div>
         </div>
 
-        <div className="bg-[#111827] p-8 rounded-xl border border-white/5 shadow-2xl">
+        <div className="flex-1 w-full bg-[#111827] p-8 rounded-xl border border-white/5 shadow-2xl">
           <form className="space-y-6">
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-2">

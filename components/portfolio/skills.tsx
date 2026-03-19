@@ -51,9 +51,9 @@ export function Skills() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 relative z-10">
+      <div className="flex flex-wrap justify-center gap-8 mb-20 relative z-10">
         {stats.map((stat) => (
-          <div key={stat.label} className="bg-[#111827] border border-white/10 p-8 rounded-lg text-center hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] transition-all group">
+          <div key={stat.label} className="flex-1 min-w-[250px] bg-[#111827] border border-white/10 p-8 rounded-lg text-center hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] transition-all group">
             <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 mb-2 group-hover:scale-110 transition-transform inline-block">
               {stat.value}
             </div>
@@ -64,9 +64,9 @@ export function Skills() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-12 relative z-10">
+      <div className="flex flex-wrap gap-12 relative z-10">
         {skillCategories.map((category) => (
-          <div key={category.title} className="space-y-6">
+          <div key={category.title} className="flex-1 min-w-[300px] space-y-6">
             <h3 className="text-xl font-semibold text-white border-b border-white/10 pb-2">
               {category.title}
             </h3>
