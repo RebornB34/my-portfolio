@@ -25,7 +25,7 @@ export async function HTBStats() {
   if (!profile) return null;
 
   const stats = [
-    { label: "Rank", value: profile.rank_text || "Unranked", icon: Trophy, color: "text-yellow-400" },
+    { label: "Rank", value: profile.rank || "Unranked", icon: Trophy, color: "text-yellow-400" },
     { label: "System Owns", value: profile.system_owns !== undefined ? profile.system_owns : 0, icon: Target, color: "text-red-400" },
     { label: "User Owns", value: profile.user_owns !== undefined ? profile.user_owns : 0, icon: Crosshair, color: "text-cyan-400" },
     { label: "Respect", value: profile.respects !== undefined ? profile.respects : 0, icon: Award, color: "text-green-400" },

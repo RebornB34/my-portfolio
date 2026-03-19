@@ -29,11 +29,11 @@ export function Navbar() {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <a href="#home" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Home</a>
-              <a href="#about" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">About</a>
-              <a href="#skills" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Skills</a>
-              <a href="#projects" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Projects</a>
-              <a href="#contact" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Contact</a>
+              <Link href="/#home" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Home</Link>
+              <Link href="/#about" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">About</Link>
+              <Link href="/#skills" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Skills</Link>
+              <Link href="/projects" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Projects</Link>
+              <Link href="/#contact" className="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Contact</Link>
             </div>
           </div>
           <div className="hidden md:flex items-center">
@@ -56,11 +56,11 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-[#0B1120] border-b border-white/10">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#home" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-            <a href="#about" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">About</a>
-            <a href="#skills" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Skills</a>
-            <a href="#projects" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-            <a href="#contact" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            <Link href="/#home" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Home</Link>
+            <Link href="/#about" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">About</Link>
+            <Link href="/#skills" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Skills</Link>
+            <Link href="/projects" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
+            <Link href="/#contact" className="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
             <div className="text-gray-300 px-3 py-2 font-mono text-sm border-t border-white/5 mt-2 pt-2">{time}</div>
           </div>
         </div>
