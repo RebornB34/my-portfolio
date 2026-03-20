@@ -29,10 +29,33 @@ export async function getHTBProfile() {
 
 export async function getHTBActivity() {
   const data = await htbFetch(`/user/profile/activity/${HTB_ID}`);
-  return data?.activity || [];
+  return data?.profile?.activity || [];
 }
 
 export async function getHTBMachines() {
-  const data = await htbFetch(`/user/profile/progress/machines/${HTB_ID}`);
-  return data?.profile?.content || [];
+  const activity = await getHTBActivity();
+  if (!activity) return [];
+
+  // Extract unique machine IDs where the user got root
+  const rootedMachineIds = Array.from(new Set(
+    activity
+      .filter((a: any) => a.object_type === 'machine' && (a.type === 'root' || a.type === 'user'))
+      .map((a: any) => a.id)
+  ));
+
+  // Fetch details for each machine to get OS and Difficulty
+  // We use Promise.all to fetch them in parallel. Next.js will cache these.
+  try {
+    const machineDetails = await Promise.all(
+      rootedMachineIds.slice(0, 50).map(async (id) => {
+        const data = await htbFetch(`/machine/profile/${id}`);
+        return data?.info || null;
+      })
+    );
+
+    return machineDetails.filter(m => m !== null);
+  } catch (error) {
+    console.error("Error fetching machine details:", error);
+    return [];
+  }
 }

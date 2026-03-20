@@ -28,7 +28,7 @@ export async function HTBActivityPulse() {
             <div className="flex-1">
               <span className="text-green-400 font-bold">root@portfolio:~$ </span>
               <span className="text-gray-300">
-                {event.type === "machine" ? "Rooted " : "Captured flag on "}
+                {event.type === "root" ? "Rooted " : "Captured flag on "}
                 <span className="text-white font-bold underline decoration-blue-500/50">{event.name}</span>
                 {event.machine_difficulty && (
                    <span className="ml-2 px-1.5 py-0.5 rounded bg-blue-500/10 text-[10px] text-blue-400 border border-blue-500/20 uppercase">
