@@ -23,11 +23,11 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#e8e7e1]/90 dark:bg-[#0B1120]/80 backdrop-blur-md border-b border-[#cbc9c0] dark:border-white/10 transition-colors duration-300">
+    <nav className="fixed top-0 w-full z-50 font-mono bg-[#e8e7e1]/90 dark:bg-[#0B1120]/80 backdrop-blur-md border-b border-[#cbc9c0] dark:border-white/10 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link href="/" className="text-xl font-bold font-serif text-[#a72334] dark:font-sans dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-500 dark:to-cyan-400">
+            <Link href="/" className="text-xl font-bold text-[#a72334] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-500 dark:to-cyan-400">
               Brian Bundi Portfolio
             </Link>
           </div>
