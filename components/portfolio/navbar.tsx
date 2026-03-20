@@ -59,6 +59,7 @@ export function Navbar() {
               <Link href="/#about" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">About</Link>
               <Link href="/#skills" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Skills</Link>
               <Link href="/projects" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Projects</Link>
+              <Link href="/machines" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Machines</Link>
               <Link href="/blog" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Blog</Link>
               <Link href="/#contact" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Contact</Link>
             </div>
@@ -105,6 +106,7 @@ export function Navbar() {
             <Link href="/#about" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">About</Link>
             <Link href="/#skills" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Skills</Link>
             <Link href="/projects" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
+            <Link href="/machines" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Machines</Link>
             <Link href="/blog" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Blog</Link>
             <Link href="/#contact" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
             <div className="text-[#a72334] dark:text-gray-300 px-3 py-2 font-mono text-sm border-t border-[#cbc9c0] dark:border-white/5 mt-2 pt-2">{time}</div>

@@ -1,26 +1,11 @@
 import { Target, Trophy, Crosshair, Award } from "lucide-react";
+import { getHTBProfile } from "@/lib/htb";
+import { HTBActivityPulse } from "./htb-activity-pulse";
 
-async function getHTBStats() {
-  const token = process.env.HTB_API_TOKEN;
-  if (!token) return null;
 
-  try {
-    const res = await fetch("https://labs.hackthebox.com/api/v4/user/profile/basic/2252974", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      next: { revalidate: 3600 } // Cache for 1 hour
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return data.profile;
-  } catch (error) {
-    return null;
-  }
-}
 
 export async function HTBStats() {
-  const profile = await getHTBStats();
+  const profile = await getHTBProfile();
   
   if (!profile) return null;
 
@@ -57,6 +42,10 @@ export async function HTBStats() {
             </div>
           </div>
         ))}
+      </div>
+      
+      <div className="mt-8">
+        <HTBActivityPulse />
       </div>
     </div>
   );
