@@ -62,7 +62,7 @@ export function HTBMachineIndex({ machines }: { machines: Machine[] }) {
             
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center p-2 relative overflow-hidden">
-                <img src={`https://www.hackthebox.com${machine.avatar}`} alt={machine.name} className="w-full h-full object-contain relative z-10" />
+                <img src={`https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com${machine.avatar}`} alt={machine.name} className="w-full h-full object-contain relative z-10" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent" />
               </div>
               <div>
