@@ -92,12 +92,12 @@ export function HTBMachineIndex({ machines }: { machines: Machine[] }) {
 
             <div className="space-y-3 font-mono text-xs">
               <div className="flex justify-between items-center text-gray-500 dark:text-gray-500">
-                <span>User Pwned:</span>
-                <span className="text-cyan-600 dark:text-cyan-400 font-bold">{machine.user_info || "Completed"}</span>
+                <span>Exploit Status:</span>
+                <span className="text-green-600 dark:text-green-400 font-bold uppercase tracking-widest text-[10px]">Verified Root</span>
               </div>
               <div className="flex justify-between items-center text-gray-500 dark:text-gray-500">
-                <span>System Pwned:</span>
-                <span className="text-red-700 dark:text-red-400 font-bold">{machine.root_info || "Completed"}</span>
+                <span>Access Level:</span>
+                <span className="text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-widest text-[10px]">Administrative (Root)</span>
               </div>
             </div>
 
@@ -107,7 +107,7 @@ export function HTBMachineIndex({ machines }: { machines: Machine[] }) {
                </div>
                <div className="flex justify-between mt-2 text-[9px] uppercase tracking-widest text-gray-400">
                  <span>Capture the Flag</span>
-                 <span>100% Pwned</span>
+                 <span>100% Compromised</span>
                </div>
             </div>
           </div>
