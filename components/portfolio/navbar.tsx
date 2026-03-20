@@ -22,6 +22,28 @@ export function Navbar() {
     return () => clearInterval(interval);
   }, []);
 
+  // Handle hash scrolling for static exports
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    // Scroll on initial load
+    if (mounted) {
+      setTimeout(handleHashScroll, 500);
+    }
+
+    // Scroll when hash changes
+    window.addEventListener("hashchange", handleHashScroll);
+    return () => window.removeEventListener("hashchange", handleHashScroll);
+  }, [mounted]);
+
   return (
     <nav className="fixed top-0 w-full z-50 font-mono bg-[#e8e7e1]/90 dark:bg-[#0B1120]/80 backdrop-blur-md border-b border-[#cbc9c0] dark:border-white/10 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,12 +55,12 @@ export function Navbar() {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <a href="/#home" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Home</a>
-              <a href="/#about" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">About</a>
-              <a href="/#skills" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Skills</a>
+              <Link href="/#home" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Home</Link>
+              <Link href="/#about" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">About</Link>
+              <Link href="/#skills" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Skills</Link>
               <Link href="/projects" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Projects</Link>
               <Link href="/blog" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Blog</Link>
-              <a href="/#contact" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Contact</a>
+              <Link href="/#contact" className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 transition-colors px-3 py-2 rounded-md font-medium text-sm">Contact</Link>
             </div>
           </div>
           <div className="hidden md:flex items-center gap-4">
@@ -79,12 +101,12 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-[#e8e7e1] dark:bg-[#0B1120] border-b border-[#cbc9c0] dark:border-white/10 transition-colors duration-300">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/#home" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-            <a href="/#about" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">About</a>
-            <a href="/#skills" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+            <Link href="/#home" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Home</Link>
+            <Link href="/#about" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">About</Link>
+            <Link href="/#skills" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Skills</Link>
             <Link href="/projects" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
             <Link href="/blog" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Blog</Link>
-            <a href="/#contact" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            <Link href="/#contact" onClick={() => setIsOpen(false)} className="text-[#1a1a1a] hover:text-[#a72334] dark:text-gray-300 dark:hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
             <div className="text-[#a72334] dark:text-gray-300 px-3 py-2 font-mono text-sm border-t border-[#cbc9c0] dark:border-white/5 mt-2 pt-2">{time}</div>
           </div>
         </div>
