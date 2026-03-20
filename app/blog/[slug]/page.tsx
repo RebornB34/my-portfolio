@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Navbar } from "@/components/portfolio/navbar";
 
 export async function generateStaticParams() {
   const posts = getSortedPosts();
@@ -21,6 +22,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   return (
     <article className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto transition-colors duration-300">
+      <Navbar />
       <Link href="/blog" className="inline-flex items-center gap-2 text-gray-600 hover:text-[#a72334] dark:text-gray-400 dark:hover:text-cyan-400 transition-colors mb-12">
         <ArrowLeft className="w-4 h-4" />
         Back to Posts
