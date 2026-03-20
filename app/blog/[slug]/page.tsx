@@ -21,9 +21,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   }
 
   return (
-    <article className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto transition-colors duration-300">
+    <>
       <Navbar />
-      <Link href="/blog" className="inline-flex items-center gap-2 text-gray-600 hover:text-[#a72334] dark:text-gray-400 dark:hover:text-cyan-400 transition-colors mb-12">
+      <article className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto transition-colors duration-300">
+        <Link href="/blog" className="inline-flex items-center gap-2 text-gray-600 hover:text-[#a72334] dark:text-gray-400 dark:hover:text-cyan-400 transition-colors mb-12">
         <ArrowLeft className="w-4 h-4" />
         Back to Posts
       </Link>
@@ -40,6 +41,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       <div className="prose prose-stone dark:prose-invert dark:prose-cyan max-w-none prose-pre:bg-[#e8e7e1] dark:prose-pre:bg-[#0a0f18] prose-pre:border prose-pre:border-[#cbc9c0] dark:prose-pre:border-white/10 prose-p:text-[#1a1a1a] dark:prose-p:text-gray-300 transition-colors">
         <MDXRemote source={post.content} />
       </div>
-    </article>
+      </article>
+    </>
   );
 }

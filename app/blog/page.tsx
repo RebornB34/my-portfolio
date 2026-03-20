@@ -6,9 +6,10 @@ export default function BlogIndex() {
   const posts = getSortedPosts();
 
   return (
-    <main className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto transition-colors duration-300">
+    <>
       <Navbar />
-      <div className="mb-12">
+      <main className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto transition-colors duration-300">
+        <div className="mb-12">
         <h1 className="text-4xl font-bold font-serif text-[#a72334] dark:font-mono dark:text-cyan-400 mb-4 transition-colors">Security Write-ups &amp;&amp; Notes</h1>
         <p className="text-gray-700 dark:text-gray-400 text-lg transition-colors">My personal space for sharing CTF solutions, vulnerability research, and technical thoughts.</p>
       </div>
@@ -41,6 +42,7 @@ export default function BlogIndex() {
           cd .. (Return Home)
         </Link>
       </div>
-    </main>
+      </main>
+    </>
   );
 }
