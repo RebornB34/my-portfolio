@@ -1,6 +1,7 @@
 import { getPostBySlug, getSortedPosts } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/portfolio/navbar";
@@ -39,7 +40,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       </header>
 
       <div className="prose prose-stone dark:prose-invert dark:prose-cyan max-w-none prose-pre:bg-[#0B1120] dark:prose-pre:bg-[#0a0f18] prose-pre:text-white prose-pre:border prose-pre:border-white/10 prose-p:text-[#1a1a1a] dark:prose-p:text-gray-300 transition-colors">
-        <MDXRemote source={post.content} />
+        <MDXRemote 
+          source={post.content} 
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+            },
+          }}
+        />
       </div>
       </article>
     </>
